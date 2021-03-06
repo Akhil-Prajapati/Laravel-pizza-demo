@@ -21,4 +21,5 @@
             </div>
         </div>
     </div>
+    <a href="/list" class="btn btn-light"> GO Back</a>
 @endsection

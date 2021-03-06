@@ -21,4 +21,32 @@ class PizzaController extends Controller
     public function pizza(){
         return view('Pizzas.pizza');
     }
+
+    public function create(){
+        return view('pizzas.create');
+    }
+
+    public function store(){
+        $temp = json_encode(request('extra'));
+        $pizza = new Pizza();
+
+        $pizza->name = request('pizza');
+        $pizza->price = request('price');
+        $pizza->extra = $temp;
+        $pizza->size = request('size');
+
+        $pizza->save();
+
+        error_log($pizza);
+
+        return redirect('/list')->with('massage' , '✔  Thanks for creating');
+    }
+
+    public function destroy($id){
+        $pizza = Pizza::find($id);
+        $pizza->delete();
+
+        return redirect('/list')->with('massage' , '🚫 Thanks for creating');
+
+    }
 }

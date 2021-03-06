@@ -29,14 +29,21 @@
 @endsection
 @section('menu')
     <div class="form-group mb-4">
-        <label for="pizzas" class="text-light"><h3>pizzas:</h3></label>
-        <select class="form-control" name="pizzas" id="pizzas">
+        <label for="pizzas" class="text-light"><h3>pizzas:</h3><h4 class="text-success">{{ session('massage')}}</h4></label>
             @foreach($pizzas as $pizza)
-                <option value="{{ $pizza['name'] }}">🍕{{ $pizza['name'] }}</option>
+                <form action="/pizza/{{ $pizza->id }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <li class="text-bold text-light" value="{{ $pizza['name'] }}">🍕{{ $pizza['name'] }}</li>
+                    <button class="text-light" style="padding: 0;
+                    border: none;
+                    background: none;
+                    "><i class="fas fa-ghost"></i></button>
+                </form>
             @endforeach
-        </select>
     </div>
     <button type="button" class="btn btn-outline-light">Submit</button>
+    <a href="/pizza/create" class="btn btn-secondary btn-block">Create Pizza</a>
 @endsection 
 @section('extras')
     {{-- {{ $pizza['name'] }} --}}   
