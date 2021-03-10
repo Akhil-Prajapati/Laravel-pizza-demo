@@ -20,7 +20,11 @@ Route::get('/', function () {
 Route::get('/list', [PizzaController::class, 'index']);
 Route::get('/order/{name}', [PizzaController::class, 'show']);
 Route::get('/pizza', [PizzaController::class, 'index']);
-Route::get('/pizza/create', [PizzaController::class, 'create']);
+Route::get('/pizza/create', [PizzaController::class, 'create'])->middleware('auth');
 Route::post('/pizza', [PizzaController::class, 'store']);
 Route::delete('/pizza/{id}', [PizzaController::class, 'destroy']);
 
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');

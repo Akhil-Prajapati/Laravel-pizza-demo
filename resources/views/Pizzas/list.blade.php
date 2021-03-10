@@ -1,7 +1,7 @@
 @extends('Pizzas.pizza')
 @section('Pizzalist')
-<div class="row bg-light">
-    <div class="col-3">
+<div class="row-auto">
+    <div class="col-auto">
             @foreach($pizzas as $pizza)
                 <h2>🍕{{ $pizza['name'] }}</h2>
                 <ul>
@@ -28,22 +28,19 @@
     <p>best pizza is the only here </p>
 @endsection
 @section('menu')
-    <div class="form-group mb-4">
-        <label for="pizzas" class="text-light"><h3>pizzas:</h3><h4 class="text-success">{{ session('massage')}}</h4></label>
+    <div class="space-y-6">
+        <label for="pizzas" class="text-indigo-600 font-sans text-4xl"><h2>pizzas:</h2><h4 class="text-success">{{ session('massage')}}</h4></label>
             @foreach($pizzas as $pizza)
                 <form action="/pizza/{{ $pizza->id }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <li class="text-bold text-light" value="{{ $pizza['name'] }}">🍕{{ $pizza['name'] }}</li>
-                    <button class="text-light" style="padding: 0;
-                    border: none;
-                    background: none;
-                    "><i class="fas fa-ghost"></i></button>
+                    <button class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded">DELETE</button>
                 </form>
             @endforeach
     </div>
-    <button type="button" class="btn btn-outline-light">Submit</button>
-    <a href="/pizza/create" class="btn btn-secondary btn-block">Create Pizza</a>
+    <button type="button" class="bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-700 hover:border-transparent rounded">Submit</button>
+    <a href="/pizza/create" class="bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-700 hover:border-transparent rounded">Create Pizza</a>
 @endsection 
 @section('extras')
     {{-- {{ $pizza['name'] }} --}}   
